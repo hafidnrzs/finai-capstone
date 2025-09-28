@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { categorizer } from "@/app/lib/ai/service";
+import { aiProvider } from "@/app/lib/ai/service";
 
 export async function POST(req: Request) {
   try {
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
     }
 
     // 4. Pass both arguments to the categorizer service
-    const category = await categorizer.categorize(description, transactionType);
+    const category = await aiProvider.categorize(description, transactionType);
 
     return NextResponse.json({ category });
   } catch (error) {

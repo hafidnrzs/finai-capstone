@@ -114,10 +114,10 @@ export default function AIInsightCard() {
           <span className="hidden md:block">Segarkan</span>
         </button>
       </div>
-      <div className="mt-4 min-h-[60px] text-gray-600">
+      <div className="mt-4 min-h-[60px] text-lg text-gray-600">
         {isLoading && <p>Menganalisis keuangan Anda...</p>}
         {error && <p className="text-red-500">{error}</p>}
-        {!isLoading && !error && <p>"{insight}"</p>}
+        {!isLoading && !error && <p>{insight}</p>}
       </div>
     </div>
   );
