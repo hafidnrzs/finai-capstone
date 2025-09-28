@@ -1,9 +1,39 @@
 import Replicate from "replicate";
 import { IAIProvider, MonthlySummary } from "./interface";
 
-const EXPENSE_CATEGORIES =
-  "[Shopping, Transportation, Food & Drink, Bills & Utilities, Health, Entertainment, Other]";
-const INCOME_CATEGORIES = "[Salary, Gigs, Refund, Other]";
+const EXPENSE_CATEGORIES = `[
+  Housing,
+  Transportation,
+  Food,
+  Health,
+  Personal Care,
+  Entertainment,
+  Shopping,
+  Travel,
+  Education,
+  Debt Repayment,
+  Savings,
+  Insurance,
+  Taxes,
+  Gifts & Donations,
+  Other Expenses
+]`;
+const INCOME_CATEGORIES = `[
+  Salary/Wages,
+  Bonus,
+  Commission,
+  Freelance/Contract Work,
+  Dividends,
+  Interest Income,
+  Rental Income,
+  Government Benefits,
+  Child Support,
+  Alimony,
+  Retirement Withdrawals,
+  Social Security,
+  Pension,
+  Other Income
+]`;
 
 class ReplicateAdapter implements IAIProvider {
   private replicate: Replicate;
@@ -40,8 +70,16 @@ class ReplicateAdapter implements IAIProvider {
     const output = await this.replicate.run(modelIdentifier, {
       input: { prompt },
     });
-
-    return (output as string[]).join("").trim() || "Other";
+    let category = (output as string[]).join("").trim();
+    // Remove wrapping quotes if present
+    if (category.startsWith('"') && category.endsWith('"')) {
+      category = category.slice(1, -1);
+    }
+    // Normalize and handle 'Other' cases
+    if (!category || category.toLowerCase().includes("other")) {
+      return type === "income" ? "Other Income" : "Other Expenses";
+    }
+    return category;
   }
 
   async generateInsight(summary: MonthlySummary): Promise<string> {

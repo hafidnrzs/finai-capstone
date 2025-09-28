@@ -2,9 +2,39 @@ import { GoogleGenAI } from "@google/genai";
 import { IAIProvider, MonthlySummary } from "./interface";
 
 // Define the category lists based on your schema's 'type'
-const EXPENSE_CATEGORIES =
-  "[Shopping, Transportation, Food & Drink, Bills & Utilities, Health, Entertainment, Other]";
-const INCOME_CATEGORIES = "[Salary, Gigs, Refund, Other]";
+const EXPENSE_CATEGORIES = `[
+  Housing,
+  Transportation,
+  Food,
+  Health,
+  Personal Care,
+  Entertainment,
+  Shopping,
+  Travel,
+  Education,
+  Debt Repayment,
+  Savings,
+  Insurance,
+  Taxes,
+  Gifts & Donations,
+  Other Expenses
+]`;
+const INCOME_CATEGORIES = `[
+  Salary/Wages,
+  Bonus,
+  Commission,
+  Freelance/Contract Work,
+  Dividends,
+  Interest Income,
+  Rental Income,
+  Government Benefits,
+  Child Support,
+  Alimony,
+  Retirement Withdrawals,
+  Social Security,
+  Pension,
+  Other Income
+]`;
 
 class GeminiAdapter implements IAIProvider {
   private genAI: GoogleGenAI;
@@ -44,9 +74,16 @@ class GeminiAdapter implements IAIProvider {
       model: this.model,
       contents: prompt,
     });
-    const category = response.text?.trim();
-
-    return category || "Other";
+    let category = response.text?.trim() || "";
+    // Remove wrapping quotes if present
+    if (category.startsWith('"') && category.endsWith('"')) {
+      category = category.slice(1, -1);
+    }
+    // Normalize and handle 'Other' cases
+    if (!category || category.toLowerCase().includes("other")) {
+      return type === "income" ? "Other Income" : "Other Expenses";
+    }
+    return category;
   }
 
   async generateInsight(summary: MonthlySummary): Promise<string> {
