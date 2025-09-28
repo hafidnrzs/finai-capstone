@@ -40,28 +40,28 @@ export default function OverviewCards() {
     `Rp ${amount.toLocaleString("id-ID")}`;
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+    <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
       {/* Income Card */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="rounded-lg bg-white p-6 shadow-md">
         <h3 className="text-sm font-medium text-gray-500">
-          This Month's Income
+          Pemasukan Bulan Ini
         </h3>
         <p className="mt-2 text-3xl font-bold text-green-600">
           {formatCurrency(monthlyStats.totalIncome)}
         </p>
       </div>
       {/* Expenses Card */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
+      <div className="rounded-lg bg-white p-6 shadow-md">
         <h3 className="text-sm font-medium text-gray-500">
-          This Month's Expenses
+          Pengeluaran Bulan Ini
         </h3>
         <p className="mt-2 text-3xl font-bold text-red-600">
           {formatCurrency(monthlyStats.totalExpenses)}
         </p>
       </div>
       {/* Balance Card */}
-      <div className="bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-sm font-medium text-gray-500">Net Balance</h3>
+      <div className="rounded-lg bg-white p-6 shadow-md">
+        <h3 className="text-sm font-medium text-gray-500">Saldo Bersih</h3>
         <p
           className={`mt-2 text-3xl font-bold ${
             monthlyStats.netBalance >= 0 ? "text-gray-800" : "text-red-600"

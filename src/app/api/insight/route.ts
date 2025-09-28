@@ -9,7 +9,7 @@ export async function POST(req: Request) {
     if (!summary) {
       return NextResponse.json(
         { error: "Monthly summary data is required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -21,7 +21,7 @@ export async function POST(req: Request) {
     console.error("Insight API Error:", error);
     return NextResponse.json(
       { error: "Failed to generate insight" },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }

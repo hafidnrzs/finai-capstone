@@ -9,7 +9,7 @@ export default function TransactionForm() {
   const [amount, setAmount] = useState("");
   const [accountId, setAccountId] = useState("");
   const [transactionType, setTransactionType] = useState<"expense" | "income">(
-    "expense"
+    "expense",
   );
 
   // --- UI & API State ---
@@ -52,12 +52,12 @@ export default function TransactionForm() {
       const category = categories.find(
         (c) =>
           c.name.toLowerCase() === aiCategoryName.toLowerCase() &&
-          c.type === transactionType
+          c.type === transactionType,
       );
 
       if (!category) {
         throw new Error(
-          `AI suggested category "${aiCategoryName}" not found for type "${transactionType}".`
+          `AI suggested category "${aiCategoryName}" not found for type "${transactionType}".`,
         );
       }
 
@@ -75,7 +75,7 @@ export default function TransactionForm() {
       setAmount("");
     } catch (err) {
       setError(
-        err instanceof Error ? err.message : "An unknown error occurred."
+        err instanceof Error ? err.message : "An unknown error occurred.",
       );
     } finally {
       setIsLoading(false);
@@ -83,23 +83,23 @@ export default function TransactionForm() {
   };
 
   return (
-    <div className="p-6 bg-white rounded-lg shadow-md w-full max-w-md">
-      <h2 className="text-2xl font-bold mb-4">Add New Transaction</h2>
+    <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
+      <h2 className="mb-4 text-2xl font-bold">Tambah Transaksi Baru</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
           <label
             htmlFor="description"
             className="block text-sm font-medium text-gray-700"
           >
-            Description
+            Deskripsi
           </label>
           <input
             id="description"
             type="text"
             value={description}
             onChange={(e) => setDescription(e.target.value)}
-            placeholder="e.g., Kopi Kenangan"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            placeholder="misal, Kopi Kenangan"
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
             required
           />
         </div>
@@ -108,7 +108,7 @@ export default function TransactionForm() {
             htmlFor="amount"
             className="block text-sm font-medium text-gray-700"
           >
-            Amount
+            Jumlah
           </label>
           <input
             id="amount"
@@ -116,7 +116,7 @@ export default function TransactionForm() {
             value={amount}
             onChange={(e) => setAmount(e.target.value)}
             placeholder="50000"
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
             required
           />
         </div>
@@ -125,13 +125,13 @@ export default function TransactionForm() {
             htmlFor="account"
             className="block text-sm font-medium text-gray-700"
           >
-            Account
+            Akun
           </label>
           <select
             id="account"
             value={accountId}
             onChange={(e) => setAccountId(e.target.value)}
-            className="mt-1 block w-full px-3 py-2 border border-gray-300 bg-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
+            className="mt-1 block w-full rounded-md border border-gray-300 bg-white px-3 py-2 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 focus:outline-none"
           >
             {accounts.map((acc) => (
               <option key={acc.id} value={acc.id}>
@@ -144,34 +144,34 @@ export default function TransactionForm() {
           <button
             type="button"
             onClick={() => setTransactionType("expense")}
-            className={`w-full p-2 rounded-md ${
+            className={`w-full cursor-pointer rounded-md p-2 ${
               transactionType === "expense"
                 ? "bg-red-500 text-white"
                 : "bg-gray-200"
             }`}
           >
-            Expense
+            Pengeluaran
           </button>
           <button
             type="button"
             onClick={() => setTransactionType("income")}
-            className={`w-full p-2 rounded-md ${
+            className={`w-full cursor-pointer rounded-md p-2 ${
               transactionType === "income"
                 ? "bg-green-500 text-white"
                 : "bg-gray-200"
             }`}
           >
-            Income
+            Pemasukan
           </button>
         </div>
         <button
           type="submit"
           disabled={isLoading}
-          className="w-full bg-indigo-600 text-white py-2 px-4 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400"
+          className="w-full cursor-pointer rounded-md bg-indigo-600 px-4 py-2 text-white hover:bg-indigo-700 focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 focus:outline-none disabled:bg-gray-400"
         >
-          {isLoading ? "Processing..." : "Add Transaction"}
+          {isLoading ? "Memproses..." : "Tambah Transaksi"}
         </button>
-        {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
+        {error && <p className="mt-2 text-sm text-red-500">{error}</p>}
       </form>
     </div>
   );

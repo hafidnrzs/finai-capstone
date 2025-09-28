@@ -20,7 +20,7 @@ export default function AIInsightCard() {
     const relevantTxns = transactions.filter(
       (t) =>
         new Date(t.transactionDate) >= startOfMonth &&
-        new Date(t.transactionDate) <= endOfMonth
+        new Date(t.transactionDate) <= endOfMonth,
     );
 
     let totalIncome = 0;
@@ -96,21 +96,21 @@ export default function AIInsightCard() {
   }, []); // Run only once
 
   return (
-    <div className="bg-white p-6 rounded-lg shadow-md">
-      <div className="flex justify-between items-center">
+    <div className="mb-8 rounded-lg bg-white p-6 shadow-md">
+      <div className="flex items-center justify-between">
         <h3 className="text-lg font-bold text-gray-800">
-          Your AI Financial Tip
+          Tips Keuangan AI Anda
         </h3>
         <button
           onClick={() => fetchInsight(true)}
           disabled={isLoading}
           className="text-sm text-indigo-600 hover:text-indigo-800 disabled:text-gray-400"
         >
-          Refresh
+          Segarkan
         </button>
       </div>
-      <div className="mt-4 text-gray-600 min-h-[60px]">
-        {isLoading && <p>Analyzing your finances...</p>}
+      <div className="mt-4 min-h-[60px] text-gray-600">
+        {isLoading && <p>Menganalisis keuangan Anda...</p>}
         {error && <p className="text-red-500">{error}</p>}
         {!isLoading && !error && <p>"{insight}"</p>}
       </div>

@@ -21,7 +21,7 @@ class GeminiAdapter implements IAIProvider {
   // The 'categorize' function now accepts the transaction 'type'
   async categorize(
     description: string,
-    type: "expense" | "income"
+    type: "expense" | "income",
   ): Promise<string> {
     // Dynamically select the category list and construct the prompt
     const categoryList =

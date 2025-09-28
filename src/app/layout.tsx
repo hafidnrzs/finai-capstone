@@ -22,9 +22,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${lato.variable} antialiased`}
-      >
+      <body className={`${lato.variable} antialiased`}>
         <DataProvider>{children}</DataProvider>
       </body>
     </html>

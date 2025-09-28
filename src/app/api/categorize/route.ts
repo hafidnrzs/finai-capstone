@@ -10,7 +10,7 @@ export async function POST(req: Request) {
     if (!description || !transactionType) {
       return NextResponse.json(
         { error: "Description and transactionType are required" },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -18,7 +18,7 @@ export async function POST(req: Request) {
     if (transactionType !== "expense" && transactionType !== "income") {
       return NextResponse.json(
         { error: 'Invalid transactionType. Must be "expense" or "income".' },
-        { status: 400 }
+        { status: 400 },
       );
     }
 
@@ -33,7 +33,7 @@ export async function POST(req: Request) {
       error instanceof Error ? error.message : "An unknown error occurred";
     return NextResponse.json(
       { error: "Failed to categorize transaction", details: errorMessage },
-      { status: 500 }
+      { status: 500 },
     );
   }
 }
