@@ -1,5 +1,5 @@
 import Replicate from "replicate";
-import { ITransactionCategorizer } from "./categorizer";
+import { ITransactionCategorizer } from "./interface";
 
 class ReplicateAdapter implements ITransactionCategorizer {
   private replicate: Replicate;

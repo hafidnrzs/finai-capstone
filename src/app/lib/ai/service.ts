@@ -1,16 +1,21 @@
-import { ITransactionCategorizer } from './categorizer';
-import { geminiAdapter } from './gemini-adapter';
-import { replicateAdapter } from './replicate-adapter';
+import { IAIProvider } from "./interface";
+import { geminiAdapter } from "./gemini-adapter";
+// import { replicateAdapter } from './replicate-adapter'; // You can uncomment this when you build it
 
-let categorizer: ITransactionCategorizer;
+let aiProvider: IAIProvider;
 
-// This is the switch. It reads the .env file and chooses the adapter.
-if (process.env.AI_PROVIDER === 'gemini') {
-  console.log("Using Gemini AI adapter.");
-  categorizer = geminiAdapter;
+// This is the "switch". It reads your .env file and selects the correct adapter.
+// It defaults to Gemini if the variable is not set.
+if (process.env.AI_PROVIDER === "replicate") {
+  console.log("Initializing Replicate AI provider...");
+  // aiProvider = replicateAdapter; // Assign the replicate adapter here
+  // For now, we'll fall back to Gemini as Replicate isn't fully implemented for insights
+  aiProvider = geminiAdapter;
 } else {
-  console.log("Using Replicate AI adapter.");
-  categorizer = replicateAdapter;
+  console.log("Initializing Gemini AI provider...");
+  aiProvider = geminiAdapter;
 }
 
-export { categorizer };
+// Export a single, unified provider.
+// Your API routes will import this object to perform any AI task.
+export { aiProvider };
