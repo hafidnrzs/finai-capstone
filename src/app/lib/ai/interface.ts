@@ -7,5 +7,5 @@ export interface MonthlySummary {
 
 export interface IAIProvider {
   categorize(description: string, type: "expense" | "income"): Promise<string>;
-  generateInsight(summary: MonthlySummary): Promise<string>; // New function
+  generateInsight(summary: MonthlySummary): Promise<string>;
 }

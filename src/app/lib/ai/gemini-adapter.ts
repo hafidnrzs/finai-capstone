@@ -53,29 +53,33 @@ class GeminiAdapter implements IAIProvider {
     const { totalIncome, totalExpenses, topExpenses } = summary;
 
     const prompt = `
-      You are a friendly and encouraging financial coach named FinAI.
-      Analyze the user's financial summary for the current month.
+      Kamu adalah pelatih keuangan yang ramah dan suportif bernama FinAI.
+      Analisa ringkasan keuangan bulanan pengguna berikut.
       
-      User's Data:
-      - Total Income: ${totalIncome}
-      - Total Expenses: ${totalExpenses}
-      - Top Spending Categories: ${topExpenses
+      Data Pengguna:
+      - Total Pemasukan: ${totalIncome}
+      - Total Pengeluaran: ${totalExpenses}
+      - Kategori Pengeluaran Terbesar: ${topExpenses
         .map((e) => `${e.category} (${e.amount})`)
         .join(", ")}
 
-      Instructions:
-      1.  If total expenses are more than 90% of income, gently express concern about the high spending. Point to the largest expense category as a potential area to save.
-      2.  If total income is significantly higher than expenses (e.g., more than double), praise the user for their excellent cash flow and saving habits.
-      3.  Otherwise, provide a neutral, helpful tip related to their biggest spending category.
-      4.  Keep the response to one or two encouraging sentences. Address the user directly.
+      Instruksi:
+      1. Jika total pengeluaran lebih dari 90% pemasukan, sampaikan kekhawatiran secara halus tentang tingginya pengeluaran dan tunjukkan kategori pengeluaran terbesar sebagai area penghematan.
+      2. Jika pemasukan jauh lebih besar dari pengeluaran (misal lebih dari dua kali lipat), beri pujian atas arus kas dan kebiasaan menabung yang baik.
+      3. Jika tidak, berikan tips netral dan bermanfaat terkait kategori pengeluaran terbesar.
+      4. Jawaban maksimal dua kalimat, langsung ke poin, dan gunakan bahasa yang menyemangati.
 
-      Your Insight:`;
+      Insight:`;
 
     const response = await this.genAI.models.generateContent({
       model: this.model,
       contents: prompt,
     });
-    return response.text?.trim() || "";
+    let result = response.text?.trim() || "";
+    if (result.startsWith('"') && result.endsWith('"')) {
+      result = result.slice(1, -1);
+    }
+    return result;
   }
 }
 

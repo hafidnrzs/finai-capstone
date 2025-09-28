@@ -1,6 +1,6 @@
 import { IAIProvider } from "./interface";
 import { geminiAdapter } from "./gemini-adapter";
-// import { replicateAdapter } from './replicate-adapter'; // You can uncomment this when you build it
+import { replicateAdapter } from "./replicate-adapter";
 
 let aiProvider: IAIProvider;
 
@@ -8,9 +8,7 @@ let aiProvider: IAIProvider;
 // It defaults to Gemini if the variable is not set.
 if (process.env.AI_PROVIDER === "replicate") {
   console.log("Initializing Replicate AI provider...");
-  // aiProvider = replicateAdapter; // Assign the replicate adapter here
-  // For now, we'll fall back to Gemini as Replicate isn't fully implemented for insights
-  aiProvider = geminiAdapter;
+  aiProvider = replicateAdapter; // Assign the replicate adapter here
 } else {
   console.log("Initializing Gemini AI provider...");
   aiProvider = geminiAdapter;
