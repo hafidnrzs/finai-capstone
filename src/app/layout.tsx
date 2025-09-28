@@ -3,6 +3,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 
 import { DataProvider } from "./context/DataContext";
+import Navbar from "./components/Navbar";
 
 const lato = Lato({
   subsets: ["latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`${lato.variable} antialiased`}>
+        <Navbar />
         <DataProvider>{children}</DataProvider>
       </body>
     </html>

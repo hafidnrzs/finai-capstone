@@ -2,6 +2,11 @@
 
 import { useMemo } from "react";
 import { useData } from "../context/DataContext";
+import {
+  ArrowTrendingUpIcon,
+  ArrowTrendingDownIcon,
+  BanknotesIcon,
+} from "@heroicons/react/24/outline";
 
 export default function OverviewCards() {
   const { transactions, categories } = useData();
@@ -43,7 +48,8 @@ export default function OverviewCards() {
     <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-3">
       {/* Income Card */}
       <div className="rounded-lg bg-white p-6 shadow-md">
-        <h3 className="text-sm font-medium text-gray-500">
+        <h3 className="flex items-center gap-1 text-sm font-medium text-gray-500">
+          <ArrowTrendingUpIcon className="h-5 w-5 text-green-500" />
           Pemasukan Bulan Ini
         </h3>
         <p className="mt-2 text-3xl font-bold text-green-600">
@@ -52,7 +58,8 @@ export default function OverviewCards() {
       </div>
       {/* Expenses Card */}
       <div className="rounded-lg bg-white p-6 shadow-md">
-        <h3 className="text-sm font-medium text-gray-500">
+        <h3 className="flex items-center gap-1 text-sm font-medium text-gray-500">
+          <ArrowTrendingDownIcon className="h-5 w-5 text-red-500" />
           Pengeluaran Bulan Ini
         </h3>
         <p className="mt-2 text-3xl font-bold text-red-600">
@@ -61,7 +68,10 @@ export default function OverviewCards() {
       </div>
       {/* Balance Card */}
       <div className="rounded-lg bg-white p-6 shadow-md">
-        <h3 className="text-sm font-medium text-gray-500">Saldo Bersih</h3>
+        <h3 className="flex items-center gap-1 text-sm font-medium text-gray-500">
+          <BanknotesIcon className="h-5 w-5 text-gray-700" />
+          Saldo Bersih
+        </h3>
         <p
           className={`mt-2 text-3xl font-bold ${
             monthlyStats.netBalance >= 0 ? "text-gray-800" : "text-red-600"

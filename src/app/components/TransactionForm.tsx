@@ -84,7 +84,9 @@ export default function TransactionForm() {
 
   return (
     <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-md">
-      <h2 className="mb-4 text-2xl font-bold">Tambah Transaksi Baru</h2>
+      <h2 className="mb-4 text-xl font-bold md:text-2xl">
+        Tambah Transaksi Baru
+      </h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-4">
         <div>
           <label

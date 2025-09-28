@@ -3,6 +3,7 @@
 import { useState, useEffect, useMemo } from "react";
 import { useData } from "../context/DataContext";
 import { MonthlySummary } from "@/app/lib/ai/interface";
+import { LightBulbIcon, ArrowPathIcon } from "@heroicons/react/24/outline";
 
 export default function AIInsightCard() {
   const [insight, setInsight] = useState("");
@@ -98,15 +99,19 @@ export default function AIInsightCard() {
   return (
     <div className="mb-8 rounded-lg bg-white p-6 shadow-md">
       <div className="flex items-center justify-between">
-        <h3 className="text-lg font-bold text-gray-800">
+        <h3 className="flex items-center gap-2 text-lg font-bold text-gray-800">
+          <LightBulbIcon className="h-5 w-5 text-yellow-400" />
           Tips Keuangan AI Anda
         </h3>
         <button
           onClick={() => fetchInsight(true)}
           disabled={isLoading}
-          className="text-sm text-indigo-600 hover:text-indigo-800 disabled:text-gray-400"
+          className="flex cursor-pointer items-center gap-1 text-sm text-indigo-600 hover:text-indigo-800 disabled:text-gray-400"
         >
-          Segarkan
+          <ArrowPathIcon
+            className={`h-4 w-4 ${isLoading ? "animate-spin" : ""}`}
+          />
+          <span className="hidden md:block">Segarkan</span>
         </button>
       </div>
       <div className="mt-4 min-h-[60px] text-gray-600">
